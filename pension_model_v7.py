@@ -5,7 +5,11 @@ import pandas as pd
 import plotly.graph_objects as go
 import os
 import copy
-
+# ------------------------------------------------
+# Read input file
+# if running on pc "C:\Users\ianbe\PyPen1\pension_inputs.xlsm"
+# if running via github "./pension_inputs.xlsm"
+# ------------------------------------------------
 EXCEL_PATH=r"./pension_inputs.xlsm"
 
 # ------------------------------------------------
