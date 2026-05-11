@@ -5,8 +5,9 @@ import pandas as pd
 import plotly.graph_objects as go
 import os
 import copy
+
 # ------------------------------------------------
-# Read input file
+# LOAD INPUT file values
 # if running on pc "C:\Users\ianbe\PyPen1\pension_inputs.xlsm"
 # if running via github "./pension_inputs.xlsm"
 # ------------------------------------------------
@@ -313,7 +314,7 @@ def cashflow_chart(r,i):
     fig=go.Figure()
 
     fig.add_bar(x=ages,y=spending,name="Spending Need")
-    fig.add_bar(x=ages,y=income,name="Income")
+    fig.add_bar(x=ages,y=income,name="State Pension Income", marker=dict(color="green"))
     fig.add_bar(x=ages,y=withdrawals,name="Portfolio Withdrawal")
 
     st.plotly_chart(fig,use_container_width=True)
@@ -360,7 +361,7 @@ def income_vs_needs_chart(r,i):
     fig=go.Figure()
 
     fig.add_trace(go.Bar(x=ages,y=needs,name="Spending Need"))
-    fig.add_trace(go.Bar(x=ages,y=income,name="Income"))
+    fig.add_trace(go.Bar(x=ages,y=income,name="State Pension Income", marker=dict(color="green")))
 
     st.plotly_chart(fig,use_container_width=True)
     
@@ -436,13 +437,14 @@ with tab2:
     income_vs_needs_chart(comp,opt)
 
     dual_view(comp,opt)
-      
+    
 #reports
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Image, Table
 from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.lib.pagesizes import A4
 from reportlab.lib.units import inch
 import matplotlib.pyplot as plt
+    
 
 def create_pdf_report(base,comp,inputs):
 
@@ -506,7 +508,7 @@ def create_pdf_report(base,comp,inputs):
     doc.build(elements)
 
     return file
-
+    
 #report button
 if st.button("Generate Adviser Report"):
 
