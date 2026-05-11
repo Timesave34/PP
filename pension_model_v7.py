@@ -16,9 +16,7 @@ EXCEL_PATH=r"./pension_inputs.xlsm"
 # ------------------------------------------------
 # LOAD INPUTS
 # ------------------------------------------------
-
 def load_inputs():
-
     df=pd.read_excel(EXCEL_PATH,sheet_name="Inputs")
 
     vals={}
@@ -35,9 +33,7 @@ excel=load_inputs()
 # ------------------------------------------------
 # PARSE GIFTS
 # ------------------------------------------------
-
 def parse_gifts(text):
-
     gifts={}
     if isinstance(text,str):
 
@@ -53,7 +49,6 @@ def parse_gifts(text):
 # ------------------------------------------------
 # PARSE INFLATION SCHEDULE
 # ------------------------------------------------
-
 def parse_inflation(text,yrs):
 
     rates=[float(x) for x in text.split(",")]
@@ -68,9 +63,7 @@ def parse_inflation(text,yrs):
 # ------------------------------------------------
 # MONTE CARLO
 # ------------------------------------------------
-
 def simulate(i):
-
     sims=i["sims"]
     years=i["life"]-i["age"]+1
 
@@ -158,7 +151,6 @@ def simulate(i):
 # SPENDING OPTIMISER
 # ------------------------------------------------
 def optimise(i, target):
-
     low = 0.5
     high = 2
     best = 1
@@ -185,13 +177,10 @@ def optimise(i, target):
 
     return best
 
-
 # ------------------------------------------------
 # CHARTS
 # ------------------------------------------------
-
 def percentile_chart(r,i):
-
     ages=np.arange(i["age"],i["life"]+1)
 
     p10,p50,p90=np.percentile(r["balances"],[10,50,90],axis=0)
@@ -205,7 +194,6 @@ def percentile_chart(r,i):
     st.plotly_chart(fig,use_container_width=True)
 
 def failure_chart(r,i):
-
     ages=np.arange(i["age"],i["life"]+1)
 
     fail=[np.mean(r["ruin"][:,y])*100 for y in range(r["ruin"].shape[1])]
@@ -216,7 +204,6 @@ def failure_chart(r,i):
     st.plotly_chart(fig,use_container_width=True)
 
 def withdrawal_chart(r,i):
-
     ages=np.arange(i["age"],i["life"]+1)
 
     med=np.median(r["withdrawals"],axis=0)
@@ -229,7 +216,6 @@ def withdrawal_chart(r,i):
 # ------------------------------------------------
 # STREAMLIT UI
 # ------------------------------------------------
-
 st.markdown("<h3 style='font-size:24px'>Retirement Planner</h3>",unsafe_allow_html=True)
 
 sb=st.sidebar
@@ -262,13 +248,11 @@ inputs["sims"]=int(excel["Num Simulations"])
 #inputs["slow_end"]=80
 inputs["go_end"]=inputs["age"]+11
 inputs["slow_end"]=85
-
 inputs["infl_vol"]=excel["Inflation Volatility"]
 
 # ------------------------------------------------
 # RUN SIMULATION
 # ------------------------------------------------
-
 base=simulate(inputs)
 
 #scale=optimise(inputs,90) #scale=optimise(inputs,excel["Final Balance"])
@@ -285,7 +269,6 @@ comp=simulate(opt)
 
 #charts
 def cashflow_chart(r,i):
-
     ages=np.arange(i["age"],i["life"]+1)
 
     withdrawals=np.median(r["withdrawals"],axis=0)
@@ -320,7 +303,6 @@ def cashflow_chart(r,i):
     st.plotly_chart(fig,use_container_width=True)
     
 def assets_chart(r,i):
-
     ages=np.arange(i["age"],i["life"]+1)
 
     median=np.percentile(r["balances"],50,axis=0)
@@ -336,7 +318,6 @@ def assets_chart(r,i):
     st.plotly_chart(fig,use_container_width=True)
     
 def income_vs_needs_chart(r,i):
-
     ages=np.arange(i["age"],i["life"]+1)
 
     needs=[]
@@ -366,7 +347,6 @@ def income_vs_needs_chart(r,i):
     st.plotly_chart(fig,use_container_width=True)
     
 def dual_view(r,i):
-
     ages=np.arange(i["age"],i["life"]+1)
 
     withdrawals=np.median(r["withdrawals"],axis=0)
@@ -397,7 +377,6 @@ def dual_view(r,i):
 # ------------------------------------------------
 # DISPLAY
 # ------------------------------------------------
-
 tab1,tab2=st.tabs(["Current Plan","Optimised Plan"])
 
 with tab1:
@@ -406,13 +385,9 @@ with tab1:
     st.write(f"Median final balance: £{int(base['median']):,}")
 
     percentile_chart(base,inputs)
-
     cashflow_chart(base,inputs)
-
     assets_chart(base,inputs)
-
     income_vs_needs_chart(base,inputs)
-
     dual_view(base,inputs)
 
 with tab2:
@@ -429,13 +404,9 @@ with tab2:
     st.write(f"Median final balance: £{int(comp['median']):,}")
 
     percentile_chart(comp,opt)
-
     cashflow_chart(comp,opt)
-
     assets_chart(comp,opt)
-
     income_vs_needs_chart(comp,opt)
-
     dual_view(comp,opt)
     
 #reports
@@ -445,7 +416,6 @@ from reportlab.lib.pagesizes import A4
 from reportlab.lib.units import inch
 import matplotlib.pyplot as plt
     
-
 def create_pdf_report(base,comp,inputs):
 
     file="retirement_plan_report.pdf"
@@ -511,13 +481,6 @@ def create_pdf_report(base,comp,inputs):
     
 #report button
 if st.button("Generate Adviser Report"):
-
     file=create_pdf_report(base,comp,inputs)
-
     with open(file,"rb") as f:
-
-        st.download_button(
-            "Download PDF Report",
-            f,
-            file_name="retirement_plan.pdf"
-        )
+        st.download_button("Download PDF Report",f,file_name="retirement_plan.pdf")
