@@ -6,7 +6,7 @@ import plotly.graph_objects as go
 import os
 import copy
 
-EXCEL_PATH=r"pension_inputs.xlsm"
+EXCEL_PATH=r"./pension_inputs.xlsm"
 
 # ------------------------------------------------
 # LOAD INPUTS
