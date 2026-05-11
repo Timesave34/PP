@@ -436,22 +436,7 @@ with tab2:
     income_vs_needs_chart(comp,opt)
 
     dual_view(comp,opt)
-    
-#report button
-if st.button("Generate Adviser Report"):
-
-    file=create_pdf_report(base,comp,inputs)
-
-    with open(file,"rb") as f:
-
-        st.download_button(
-            "Download PDF Report",
-            f,
-            file_name="retirement_plan.pdf"
-        )
-    
-    
-    
+      
 #reports
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Image, Table
 from reportlab.lib.styles import getSampleStyleSheet
@@ -521,3 +506,16 @@ def create_pdf_report(base,comp,inputs):
     doc.build(elements)
 
     return file
+
+#report button
+if st.button("Generate Adviser Report"):
+
+    file=create_pdf_report(base,comp,inputs)
+
+    with open(file,"rb") as f:
+
+        st.download_button(
+            "Download PDF Report",
+            f,
+            file_name="retirement_plan.pdf"
+        )
