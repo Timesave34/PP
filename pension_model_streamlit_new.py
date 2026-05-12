@@ -260,27 +260,27 @@ fig.add_bar(
 
 fig.add_bar(
     x=cashflow_df["Age"],
-    y=cashflow_df["Cash Withdrawal"],
+    y=cashflow_df["Cash Wdl"],
     name="Cash"
 )
 
 fig.add_bar(
     x=cashflow_df["Age"],
-    y=cashflow_df["Taxable Withdrawal"],
+    y=cashflow_df["Taxable Wdl"],
     name="Taxable",
     marker=dict(color='#FF0000')
 )
 
 fig.add_bar(
     x=cashflow_df["Age"],
-    y=cashflow_df["ISA Withdrawal"],
+    y=cashflow_df["ISA Wdl"],
     name="ISA", 
     marker=dict(color='#08C77E')
 )
 
 fig.add_bar(
     x=cashflow_df["Age"],
-    y=cashflow_df["Pension Withdrawal"],
+    y=cashflow_df["Pension Wdl"],
     name="Pension",
     marker=dict(color='#0D6348')
 )
@@ -311,6 +311,23 @@ fig.update_layout(
 st.plotly_chart(fig, use_container_width=True)
 
 # display the chart
+st.markdown("""
+<style>
+
+/* dataframe header */
+thead tr th {
+    font-size: 11px !important;
+    padding: 2px !important;
+}
+
+/* dataframe cells */
+tbody tr td {
+    font-size: 11px !important;
+    padding: 2px !important;
+}
+
+</style>
+""", unsafe_allow_html=True)
 st.subheader("Retirement Cashflow Ledger")
 st.dataframe(cashflow_df)
 
