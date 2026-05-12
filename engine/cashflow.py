@@ -176,19 +176,19 @@ def build_cashflow_ledger(
             "State Pension":
                 round(current_state_pension, 0),
 
-            "Required Withdrawal":
+            "Required Wdl":
                 round(required, 0),
 
-            "Cash Withdrawal":
+            "Cash Wdl":
                 round(cash_wdl, 0),
 
-            "Taxable Withdrawal":
+            "Taxable Wdl":
                 round(taxable_wdl, 0),
 
-            "ISA Withdrawal":
+            "ISA Wdl":
                 round(isa_wdl, 0),
 
-            "Pension Withdrawal":
+            "Pension Wdl":
                 round(pension_wdl, 0),
 
             "Tax Free 25%":
