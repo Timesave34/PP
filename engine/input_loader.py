@@ -1,12 +1,11 @@
 import pandas as pd
-
-#EXCEL_PATH = "./inputs.xlsm"
 # ------------------------------------------------
 # LOAD INPUT file values
 # if running on pc "C:\Users\ianbe\PyPen1\pension_inputs.xlsm"
 # if running via github "./pension_inputs.xlsm"
 # ------------------------------------------------
-EXCEL_PATH=r"C:\Users\ianbe\PyPen1\pension_inputs.xlsm"
+#EXCEL_PATH=r"C:\Users\ianbe\PyPen1\pension_inputs.xlsm"
+EXCEL_PATH = "./inputs.xlsm"
 
 def load_inputs():
     df = pd.read_excel(
