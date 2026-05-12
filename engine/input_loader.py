@@ -5,7 +5,7 @@ import pandas as pd
 # if running via github "./pension_inputs.xlsm"
 # ------------------------------------------------
 #EXCEL_PATH=r"C:\Users\ianbe\PyPen1\pension_inputs.xlsm"
-EXCEL_PATH = "./inputs.xlsm"
+EXCEL_PATH = "./pension_inputs.xlsm"
 
 def load_inputs():
     df = pd.read_excel(
