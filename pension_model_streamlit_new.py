@@ -329,7 +329,7 @@ tbody tr td {
 </style>
 """, unsafe_allow_html=True)
 st.subheader("Retirement Cashflow Ledger")
-st.dataframe(cashflow_df)
+st.dataframe(cashflow_df, hide_index=True)
 
 # ------------------------------------------------
 # RAW STATS (optional debug)
